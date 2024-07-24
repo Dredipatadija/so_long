@@ -18,6 +18,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 FT_PRINTF_DIR = ft_printf
 
+INCLUDE = libft.h
+
 FT_PRINTF_SRC = $(addprefix $(FT_PRINTF_DIR)/, ft_printf.c ft_putchar.c \
 				ft_putstr.c ft_putnbr.c ft_puthex.c ft_putptr.c ft_check.c \
 				ft_putunbr.c)
@@ -39,7 +41,7 @@ OBJECTS = $(SOURCES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-		ar -crs $(NAME) $(OBJECTS)
+		ar -crs $(NAME) $(INCLUDE) $(OBJECTS)
 
 clean:
 		rm -f $(OBJECTS) $(OBJECTS_BONUS)
