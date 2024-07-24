@@ -24,4 +24,7 @@ int	main(int argc, char **argv)
 	if (!map)
 		perror ("Memory failure");
 	error = ft_parse_file(argc, argv, map);
+	/*if (error == 1)
+	{}*/
+	return(0);
 }
