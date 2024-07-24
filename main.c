@@ -1,6 +1,8 @@
+#include "so_long.h"
+
 int main(int argc, char **argv)
 {
-    char   **map;
+    t_map   *map;
     int     error;
 
     if (!argv)
@@ -11,5 +13,5 @@ int main(int argc, char **argv)
     map = ft_calloc(sizeof(char **), 1);
     if (!map)
         perror ("Memory failure");
-    error = ft_parse_file(argc, argv[1], map);
+    error = ft_parse_file(argc, argv, map);
 }

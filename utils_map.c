@@ -1,4 +1,6 @@
-char   **ft_cpy_map(int fd, char **map)
+#include "so_long.h"
+
+t_map *ft_cpy_map(int fd, t_map *map)
 {
     char    *line;
     int     round;
@@ -23,11 +25,11 @@ char   **ft_cpy_map(int fd, char **map)
                 break;
             }
         }
-        map[i] = ft_memcpy(map[i], line, ft_strlen(line));
+        map->map[i][0] = ft_memcpy(map->map[i][0], line, ft_strlen(line));
         i++;
         round++;
         free(line);      
     }
-    map[i] = (void *)0;
+    map->map[i][0] = (void *)0;
     return (map);
 }
