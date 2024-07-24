@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 	t_map	*map;
 	int		error;
 
+	error = 0;
 	if (!argv)
 		return(ft_print_e("Map doesn't exist", 1));
 	map = ft_calloc(sizeof(t_map), 1);
