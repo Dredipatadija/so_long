@@ -42,24 +42,24 @@ int	ft_parse_file(int argc, char *argmap, t_map *map)
 	return (ft_parse_map(fd, map));
 }
 
-int	ft_nlines(int fd)
+int	ft_nlines(int fd, t_map *map)
 {
-	int		i;
 	char	*line;
 
-	i = 0;
-	while (((line = get_next_line(fd)) != NULL))
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		i++;
+		map->height++;
+		line= get_next_line(fd);
+		free (line);
 	}
-	free (line);
-	if (i == 0)
+	if (map->height == 0)
 	{
 		ft_printf("%s\n", "Empty map");
 		close(fd);
-		return (NULL);
+		return (0);
 	}
-	return (i);
+	return (map->height);
 }
 
 int	ft_parse_map(int fd, t_map *map)
@@ -67,12 +67,14 @@ int	ft_parse_map(int fd, t_map *map)
 	char	*error;
 
 	error = "Invalid map";
-	map->map = (char **)malloc(sizeof(char *) * ft_nlines(fd));
-	if (!map->map)
-		return (1);
-	map = ft_cpy_map(fd, map);
 	if (!map)
 		return (ft_print_e("Memory error", 1));
+	map->map = (char **)malloc(sizeof(char *) * ft_nlines(fd, map));
+	if (!map->map)
+		return (ft_print_e("Memory failure",1));
+	map = ft_cpy_map(fd, map);
+	if (map == NULL)
+		return (ft_print_e("Empty map", 1));
 	if (ft_parse_square(map) != 0)
 		return (ft_print_e(error, 1));
 	if (ft_parse_closed(map) != 0)
@@ -88,4 +90,16 @@ int	ft_parse_map(int fd, t_map *map)
 
 int	ft_parse_square(t_map *map)
 {
+	int	i;
+
+	i = 0;
+	while ((i < map->height) && map->map[i + 1] != NULL)
+	{
+		if (ft_strlen(map->map[i]) == ft_strlen(map->map[i]))
+			i++;
+		else
+			return (1);
+	}
+	map->width = ft_strlen(map->map[i]);
+	return (0);
 }

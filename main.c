@@ -18,11 +18,8 @@ int	main(int argc, char **argv)
 	int		error;
 
 	if (!argv)
-	{
-		ft_printf("%s\n", "Map doesn't exist");
-		return (1);
-	}
-	map = ft_calloc(sizeof(char **), 1);
+		return(ft_print_e("Map doesn't exist", 1));
+	map = ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		perror ("Memory failure");
 	error = ft_parse_file(argc, argv, map);
