@@ -25,18 +25,18 @@ void	ft_init_map(t_map *map)
 	map->y_exit = 0;
 }
 
-int	ft_parse_file(int argc, char *argmap, t_map *map)
+int	ft_parse_file(int argc, char **argmap, t_map *map)
 {
 	int	fd;
 	int	len;
 
-	len = ft_strlen(argmap) - 4;
+	len = ft_strlen(argmap[1]) - 4;
 	ft_init_map(map);
 	if (argc != 2)
 		return (ft_print_e("Invalid number of arguments", 1));
-	if (ft_strlen(argmap) <= 4 || ft_strncmp(&argmap[len], ".ber", 4) != 0)
+	if (ft_strlen(argmap[1]) <= 4 || ft_strncmp(&argmap[1][len], ".ber", 4) != 0)
 		return (ft_print_e("Invalid file", 1));
-	fd = open(argmap, O_RDONLY);
+	fd = open(argmap[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_print_e("File not found", 1));
 	return (ft_parse_map(fd, map));
