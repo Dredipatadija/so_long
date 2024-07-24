@@ -1,7 +1,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <fcntl.h>
+# include <fcntl.h>
+# include <stddef.h>
 
 typedef struct s_map
 {
