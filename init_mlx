@@ -1,0 +1,19 @@
+#include "so_long.h"
+
+int	ft_init_game(t_map **map)
+{
+	int	x;
+	int y;
+
+	(*map)->mlx = mlx_init();
+	mlx_get_screen_size((*map)->mlx, &x, &y);
+	if (x < ((*map)->width * 64) || y < ((*map)->height *64))
+	{
+		ft_msg_mlx("Map size too large", (*map)->mlx);
+		ft_free_map(*map);
+		return (1);
+	}
+	(*map)->window = mlx_new_window((*map)->mlx, ((*map)->width * 64),
+					((*map)->height * 64), "SO_LONG");
+	ft_find_exit(*map);
+}

@@ -24,3 +24,10 @@ int	ft_msg_fd(char *str, int n, int fd)
 	close(fd);
 	return (n);
 }
+
+void	ft_msg_mlx(char *str, void *mlx)
+{
+	ft_printf("%s\n", str);
+	mlx_destroy_display(mlx);
+	free(mlx);
+}

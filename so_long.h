@@ -29,7 +29,19 @@ typedef struct s_map
 	int		x_exit;
 	int		y_exit;
 	char	**map;
+	void	*mlx;
+	void	*window;
+	t_image	images;
 }				t_map;
+
+typedef struct s_image
+{
+	void	*player;
+	void	*wall;
+	void	*floor;
+	void	*exit;
+	void	*coin;
+}				t_image;
 
 void	ft_init_map(t_map *map);
 int		ft_parse_file(int argc, char **argmap, t_map *map);
@@ -40,5 +52,7 @@ int		ft_msg_error(char *str, int n);
 t_map	*ft_cpy_map(int fd, t_map *map);
 int		ft_parse_closed(t_map *map);
 int		ft_parse_c(t_map *map);
+void	ft_free_map(t_map *map);
+void	ft_msg_mlx(char *str, void *mlx);
 
 #endif

@@ -48,3 +48,8 @@ int	ft_nlines(int fd, t_map *map)
 	}
 	return (map->height);
 }
+
+void	ft_find_exit(t_map *map)
+{
+	
+}
