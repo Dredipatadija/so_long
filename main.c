@@ -19,11 +19,15 @@ int	main(int argc, char **argv)
 
 	error = 0;
 	if (!argv)
-		return (ft_print_e("Map doesn't exist", 1));
+		return (ft_msg_e("Map doesn't exist", 1));
 	map = ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		perror ("Memory failure");
 	error = ft_parse_file(argc, argv, map);
-
+	if (error == 0)
+	{}
+	else if (error == 1)
+		return (1);
+	ft_init_mlx(&map);
 	return (0);
 }

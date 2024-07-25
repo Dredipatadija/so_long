@@ -12,8 +12,15 @@
 
 #include "so_long.h"
 
-int	ft_print_e(char *str, int n)
+int	ft_msg_error(char *str, int n)
 {
 	ft_printf("%s\n", str);
+	return (n);
+}
+
+int	ft_msg_fd(char *str, int n, int fd)
+{
+	ft_printf("%s\n", str);
+	close(fd);
 	return (n);
 }

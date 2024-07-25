@@ -22,12 +22,12 @@ int	ft_parse_file(int argc, char **argmap, t_map *map)
 	len = ft_strlen(argmap[1]);
 	ft_init_map(map);
 	if (argc != 2)
-		return (ft_print_e("Invalid number of arguments", 1));
+		return (ft_msg_e("Invalid number of arguments", 1));
 	if (len <= 4 || ft_strncmp(&argmap[1][lenfinal], ".ber", 4) != 0)
-		return (ft_print_e("Invalid file", 1));
+		return (ft_msg_e("Invalid file", 1));
 	fd = open(argmap[1], O_RDONLY);
 	if (fd < 0)
-		return (ft_print_e("File not found", 1));
+		return (ft_msg_e("File not found", 1));
 	return (ft_parse_map(fd, map));
 }
 
@@ -53,18 +53,18 @@ int	ft_parse_map(int fd, t_map *map)
 
 	error = "Invalid map";
 	if (!map)
-		return (ft_print_e("Memory error", 1));
+		return (ft_msg_e("Memory error", 1));
 	map->map = (char **)malloc(sizeof(char *) * ft_nlines(fd, map));
 	if (!map->map)
-		return (ft_print_e("Memory failure", 1));
+		return (ft_msg_fd("Memory failure", 1, fd));
 	map = ft_cpy_map(fd, map);
 	if (map == NULL)
-		return (ft_print_e("Empty map", 1));
+		return (ft_print_error("Empty map", 1));
 	if (ft_parse_square(map) != 0)
-		return (ft_print_e(error, 1));
+		return (ft_print_error(error, 1));
 	if (ft_parse_closed(map) != 0)
-		return (ft_print_e(error, 1));
+		return (ft_print_error(error, 1));
 	if (ft_parse_c(map) != 0)
-		return (ft_print_e(error, 1));
+		return (ft_print_error(error, 1));
 	return (0);
 }

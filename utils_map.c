@@ -18,10 +18,7 @@ t_map	*ft_cpy_map(int fd, t_map *map)
 
 	i = 0;
 	if (map->height == 0)
-	{
-		close(fd);
 		return (NULL);
-	}
 	while (i < (map->height))
 	{
 		map->map[i] = get_next_line(fd);
