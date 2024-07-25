@@ -12,17 +12,6 @@
 
 #include "so_long.h"
 
-void	ft_init_map(t_map *map)
-{
-	map->nposition = 0;
-	map->nexit = 0;
-	map->ncollectable = 0;
-	map->width = 0;
-	map->height = 0;
-	map->x_exit = 0;
-	map->y_exit = 0;
-}
-
 int	ft_parse_file(int argc, char **argmap, t_map *map)
 {
 	int	fd;
@@ -40,26 +29,6 @@ int	ft_parse_file(int argc, char **argmap, t_map *map)
 	if (fd < 0)
 		return (ft_print_e("File not found", 1));
 	return (ft_parse_map(fd, map));
-}
-
-int	ft_nlines(int fd, t_map *map)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		map->height++;
-		line = get_next_line(fd);
-		free (line);
-	}
-	if (map->height == 0)
-	{
-		ft_printf("%s\n", "Empty map");
-		close(fd);
-		return (0);
-	}
-	return (map->height);
 }
 
 int	ft_parse_square(t_map *map)

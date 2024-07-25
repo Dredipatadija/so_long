@@ -31,3 +31,23 @@ t_map	*ft_cpy_map(int fd, t_map *map)
 	close(fd);
 	return (map);
 }
+
+int	ft_nlines(int fd, t_map *map)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		map->height++;
+		line = get_next_line(fd);
+		free (line);
+	}
+	if (map->height == 0)
+	{
+		ft_printf("%s\n", "Empty map");
+		close(fd);
+		return (0);
+	}
+	return (map->height);
+}
