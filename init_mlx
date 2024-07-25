@@ -1,5 +1,22 @@
 #include "so_long.h"
 
+int	ft_init_image(t_image *images, t_map **map)
+{
+	int	x;
+	int	y;
+
+	images->player = mlx_xpm_file_to_image((*map)->mlx, 
+					"ruta/archivo", &x, &y);
+	images->wall = mlx_xpm_file_to_image((*map)->mlx, 
+					"ruta/archivo", &x, &y);
+	images->floor = mlx_xpm_file_to_image((*map)->mlx, 
+					"ruta/archivo", &x, &y);
+	images->exit = mlx_xpm_file_to_image((*map)->mlx, 
+					"ruta/archivo", &x, &y);
+	images->coin = mlx_xpm_file_to_image((*map)->mlx, 
+					"ruta/archivo", &x, &y);
+}
+
 int	ft_init_game(t_map **map)
 {
 	int	x;
@@ -16,4 +33,5 @@ int	ft_init_game(t_map **map)
 	(*map)->window = mlx_new_window((*map)->mlx, ((*map)->width * 64),
 					((*map)->height * 64), "SO_LONG");
 	ft_find_exit(*map);
+	ft_init_image((*map)->images, map);
 }

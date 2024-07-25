@@ -54,5 +54,6 @@ int		ft_parse_closed(t_map *map);
 int		ft_parse_c(t_map *map);
 void	ft_free_map(t_map *map);
 void	ft_msg_mlx(char *str, void *mlx);
+void	ft_find_exit(t_map *map);
 
 #endif
