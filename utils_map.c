@@ -84,11 +84,8 @@ void	ft_find_position(t_map *map)
 	{
 		while (map->map[j][i] != '\0')
 		{
-			if (map->map[j][i] == 'E')
-			{
-				map->map[j][i] = '0';
+			if (map->map[j][i] == 'P')
 				break ;
-			}
 			i++;
 		}
 		j++;

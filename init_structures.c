@@ -15,5 +15,5 @@ void	ft_init_player(t_map *map)
 {
 	map->player.steps = 0;
 	map->player.coin = 0;
-	ft_find_position(t_map *map);
+	ft_find_position(map);
 }
