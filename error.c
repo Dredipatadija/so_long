@@ -25,9 +25,28 @@ int	ft_msg_fd(char *str, int n, int fd)
 	return (n);
 }
 
-void	ft_msg_mlx(char *str, void *mlx)
+int	ft_msg_mlx(char *str, void *mlx)
 {
 	ft_printf("%s\n", str);
 	mlx_destroy_display(mlx);
 	free(mlx);
+	return (1);
+}
+
+void	ft_error_image(t_map **map)
+{
+	if ((*map)->images.player)
+		mlx_destroy_image((*map)->mlx, (*map)->images.player);
+	if ((*map)->images.wall)
+		mlx_destroy_image((*map)->mlx, (*map)->images.wall);
+	if ((*map)->images.floor)
+		mlx_destroy_image((*map)->mlx, (*map)->images.floor);
+	if ((*map)->images.exit)
+		mlx_destroy_image((*map)->mlx, (*map)->images.exit);
+	if ((*map)->images.coin)
+		mlx_destroy_image((*map)->mlx, (*map)->images.coin);
+	mlx_destroy_window((*map)->mlx, (*map)->window);
+	ft_msg_mlx("Error loading images", (*map)->mlx);
+	free((*map)->mlx);
+	(*map)->mlx = NULL;
 }

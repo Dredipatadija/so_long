@@ -21,17 +21,18 @@
 
 typedef struct s_map
 {
-	int		nposition;
-	int		nexit;
-	int		ncollectable;
-	int		width;
-	int		height;
-	int		x_exit;
-	int		y_exit;
-	char	**map;
-	void	*mlx;
-	void	*window;
-	t_image	images;
+	int			nposition;
+	int			nexit;
+	int			ncollectable;
+	int			width;
+	int			height;
+	int			x_exit;
+	int			y_exit;
+	char		**map;
+	void		*mlx;
+	void		*window;
+	t_image		images;
+	t_player	player;
 }				t_map;
 
 typedef struct s_image
@@ -42,6 +43,14 @@ typedef struct s_image
 	void	*exit;
 	void	*coin;
 }				t_image;
+
+typedef struct s_player
+{
+	int	steps;
+	int	coin;
+	int	x;
+	int	y;
+}			t_player;
 
 void	ft_init_map(t_map *map);
 int		ft_parse_file(int argc, char **argmap, t_map *map);

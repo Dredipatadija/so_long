@@ -72,3 +72,27 @@ void	ft_find_exit(t_map *map)
 	map->x_exit = i;
 	map->y_exit = j;
 }
+
+void	ft_find_position(t_map *map)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	j = 0;
+	while (map->map[j] != NULL)
+	{
+		while (map->map[j][i] != '\0')
+		{
+			if (map->map[j][i] == 'E')
+			{
+				map->map[j][i] = '0';
+				break ;
+			}
+			i++;
+		}
+		j++;
+	}
+	map->player.x = i;
+	map->player.y = j;
+}
