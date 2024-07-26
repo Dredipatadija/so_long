@@ -79,7 +79,11 @@ int	ft_parse_c(t_map *map)
 		while (map->map[j][i] != '\0')
 		{
 			if (map->map[j][i] == 'P')
+			{
+				map->player.x = i;
+				map->player.y = j;
 				map->nposition++;
+			}
 			if (map->map[j][i] == 'E')
 				map->nexit++;
 			if (map->map[j][i] == 'C')

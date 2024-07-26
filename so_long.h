@@ -78,5 +78,6 @@ void	ft_free_map(t_map *map);
 void	ft_msg_mlx(char *str, void *mlx);
 void	ft_find_exit(t_map *map);
 int		ft_closemlx(char *str, t_map **map);
+int		ft_hook(int keycode, t_map **map);
 
 #endif
