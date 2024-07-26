@@ -33,7 +33,7 @@ int	ft_msg_mlx(char *str, void *mlx)
 	return (1);
 }
 
-void	ft_error_image(t_map **map)
+void	ft_error_mlx(char *str, t_map **map)
 {
 	if ((*map)->images.player)
 		mlx_destroy_image((*map)->mlx, (*map)->images.player);
@@ -46,7 +46,8 @@ void	ft_error_image(t_map **map)
 	if ((*map)->images.coin)
 		mlx_destroy_image((*map)->mlx, (*map)->images.coin);
 	mlx_destroy_window((*map)->mlx, (*map)->window);
-	ft_msg_mlx("Error loading images", (*map)->mlx);
+	ft_msg_mlx(str, (*map)->mlx);
+	mlx_loop_end((*map)->mlx);
 	free((*map)->mlx);
 	(*map)->mlx = NULL;
 }
