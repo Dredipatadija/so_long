@@ -24,9 +24,7 @@ int	main(int argc, char **argv)
 	if (!map)
 		perror ("Memory failure");
 	error = ft_parse_file(argc, argv, map);
-	if (error == 0)
-	{}
-	else if (error == 1)
+	if (error == 1)
 		return (1);
 	ft_init_mlx(&map);
 	return (0);

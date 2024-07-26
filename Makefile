@@ -14,10 +14,11 @@ NAME = ./so_long
 
 CC = gcc
 
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I$(INC)
 
-INCLUDE = so_long.h
+INC = so_long.h ./minilibx-linux/mlx.h ./libft/libft.h
 
+LDFLAGS = - -lft -L$(MLX_DIR) $(MLX) $(MLX_LINUX) -lX11 -lXext -lm -lbsd -L$(PRINTF_DIR) $(PRINTF) -lftprintf
 SOURCES = *.c
 
 OBJECTS = $(SOURCES:.c=.o)

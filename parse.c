@@ -14,10 +14,12 @@
 
 int	ft_parse_file(int argc, char **argmap, t_map *map)
 {
-	int	fd;
-	int	len;
-	int	lenfinal;
+	int		fd;
+	int		len;
+	int		lenfinal;
+	char	*error;
 
+	error = "Invalid map";
 	lenfinal = ft_strlen(argmap[1]) - 4;
 	len = ft_strlen(argmap[1]);
 	ft_init_map(map);
@@ -28,10 +30,10 @@ int	ft_parse_file(int argc, char **argmap, t_map *map)
 	fd = open(argmap[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_msg_e("File not found", 1));
-	return (ft_parse_map(fd, map));
+	return (ft_parse_map(error, fd, map));
 }
 
-int	ft_parse_square(t_map *map)
+static int	ft_parse_square(t_map *map)
 {
 	int	i;
 
@@ -47,24 +49,71 @@ int	ft_parse_square(t_map *map)
 	return (0);
 }
 
-int	ft_parse_map(int fd, t_map *map)
+int	ft_parse_map(char *error, int fd, t_map *map)
 {
-	char	*error;
+	char	**test;
 
-	error = "Invalid map";
-	if (!map)
-		return (ft_msg_e("Memory error", 1));
-	map->map = (char **)malloc(sizeof(char *) * ft_nlines(fd, map));
+	map->map = (char **)malloc(sizeof(char *) * ft_nlines(fd, map) + 1);
 	if (!map->map)
-		return (ft_msg_fd("Memory failure", 1, fd));
+		return (ft_msg_fd("Memory failure", 1, fd, map->map));
 	map = ft_cpy_map(fd, map);
 	if (map == NULL)
-		return (ft_print_error("Empty map", 1));
+		return (ft_msg_fd("Code error", 1, fd, map->map));
 	if (ft_parse_square(map) != 0)
-		return (ft_print_error(error, 1));
+		return (ft_msg_efree(error, 1, map->map));
 	if (ft_parse_closed(map) != 0)
-		return (ft_print_error(error, 1));
+		return (ft_msg_efree(error, 1, map->map));
 	if (ft_parse_c(map) != 0)
-		return (ft_print_error(error, 1));
+		return (ft_msg_efree(error, 1, map->map));
+	test = (char **)malloc(sizeof(char *) * (map->height + 1));
+	if (!test)
+	{
+		free(map->map);
+		return (ft_msg_fd("Memory failure", 1, fd, map->map));
+	}
+	test = ft_cpy_map(map, test);
+	if (ft_okroute(test, map, map->player.x, map->player.y) != 0)
+		return (ft_msg_efree(error, 1, map->map));
+	return (0);
+}
+
+int	ft_okroute(char **test, t_map *map, int x, int y)
+{
+	int	i;
+
+	if (test[y - 1][x] != 'P' && test[y - 1][x] != '1')
+		fl_okroute(test, x, y - 1);
+	if (test[y + 1][x] != 'P' && test[y + 1][x] != '1')
+		fl_okroute(test, x, y + 1);
+	if (test[y][x - 1] != 'P' && test[y][x - 1] != '1')
+		fl_okroute(test, x - 1, y);
+	if (test[y][x + 1] != 'P' && test[y][x + 1] != '1')
+		fl_okroute(test, x + 1, y);
+	i = ft_valid(test);
+	if (i == 1)
+	{
+		ft_free_test(test);
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_valid(char **test)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (test[i])
+	{
+		j = 0;
+		while (test[i][j])
+		{
+			if (test[i][j] == 'C' || test[i][j] == 'E')
+				return (1);
+			j++;
+		}
+		i++;
+	}
 	return (0);
 }

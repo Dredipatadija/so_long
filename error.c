@@ -18,10 +18,11 @@ int	ft_msg_error(char *str, int n)
 	return (n);
 }
 
-int	ft_msg_fd(char *str, int n, int fd)
+int	ft_msg_fd(char *str, int n, int fd, char **map)
 {
 	ft_printf("%s\n", str);
 	close(fd);
+	free(map);
 	return (n);
 }
 
@@ -30,6 +31,13 @@ int	ft_msg_mlx(char *str, void *mlx)
 	ft_printf("%s\n", str);
 	mlx_destroy_display(mlx);
 	free(mlx);
+	return (1);
+}
+
+int	ft_msg_efree(char *str, int n, char **map)
+{
+	free(map);
+	ft_printf("%s\n", str);
 	return (1);
 }
 

@@ -26,3 +26,18 @@ void	ft_free_map(t_map *map)
 	free(map);
 	map = NULL;
 }
+
+void	ft_free_test(char **test)
+
+{
+	int	j;
+
+	j = 0;
+	while (test[j] != NULL)
+	{
+		free(test[j]);
+		j++;
+	}
+	free(test);
+	test = NULL;
+}

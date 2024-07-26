@@ -93,3 +93,23 @@ void	ft_find_position(t_map *map)
 	map->player.x = i;
 	map->player.y = j;
 }
+
+char	**ft_cpy_test(t_map *map, char **test)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (map->map[j] != NULL)
+	{
+		while (map->map[j][i] != '\n')
+		{
+			test[j][i] = map->map[j][i];
+			i++;
+		}
+		j++;
+	}
+	test[j] = NULL;
+	return (test);
+}
