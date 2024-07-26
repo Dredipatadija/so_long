@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	ft_init_image(t_image *images, t_map **map)
+void	ft_init_image(t_image *images, t_map **map)
 {
 	int	x;
 	int	y;
@@ -32,9 +32,8 @@ int	ft_init_image(t_image *images, t_map **map)
 	{
 		ft_error_mlx("Error loading image", map);
 		ft_free_map(*map);
-		return (1);
+		exit(1);
 	}
-	return (0);
 }
 
 static int	ft_which_img(t_map **map, int x, int y)
@@ -57,7 +56,7 @@ static int	ft_which_img(t_map **map, int x, int y)
 	return (1);
 }
 
-int	ft_print_img(t_map **map)
+void	ft_print_img(t_map **map)
 {
 	int	x;
 	int	y;
@@ -72,13 +71,12 @@ int	ft_print_img(t_map **map)
 			{
 				ft_error_mlx("Error showing image", map);
 				ft_free_map (*map);
-				return (1);
+				exit(1);
 			}
 			x++;
 		}
 		y++;
 	}
-	return (0);
 }
 
 int	ft_init_game(t_map **map)
@@ -97,12 +95,12 @@ int	ft_init_game(t_map **map)
 	(*map)->window = mlx_new_window((*map)->mlx, ((*map)->width * 64),
 			((*map)->height * 64), "SO_LONG");
 	ft_find_exit(*map);
-	if (ft_init_image(&(*map)->images, map) != 0)
-		return (1);
+	ft_init_image(&(*map)->images, map);
 	ft_init_player(*map);
-	if (ft_print_img(map) != 0)
-		return (1);
+	ft_print_img(map);
 	ft_printf("Steps: %i Coins: %i\n", (*map)->player.steps,
 			(*map)->player.coin);
-	mlx_hook((*map)->window, 17, 0, ft_closemlx("Come back soon"), map);
+	mlx_hook((*map)->window, 17, 0, ft_closemlx("Come back soon", map), map);
+	mlx_hook((*map)->window, 2, 1L<<0, ft_hook, map);
+	mlx_loop((*map)->mlx);
 }

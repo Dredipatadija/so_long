@@ -18,6 +18,19 @@
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdio.h>
+# include <stdlib.h>
+
+# ifndef hooks
+#  define ESC	65307
+#  define DOWN	65364
+#  define UP	65362
+#  define LEFT	65361
+#  define RIGHT	65363
+#  define W		119
+#  define A		97
+#  define S		115
+#  define D		100
+# endif
 
 typedef struct s_map
 {
@@ -64,5 +77,6 @@ int		ft_parse_c(t_map *map);
 void	ft_free_map(t_map *map);
 void	ft_msg_mlx(char *str, void *mlx);
 void	ft_find_exit(t_map *map);
+int		ft_closemlx(char *str, t_map **map);
 
 #endif
