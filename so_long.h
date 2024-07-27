@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "./libft/libft.h"
-# include "./minilibx-linux/mlx.h"
+# include "./mlx_linux/mlx.h"
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdio.h>
@@ -79,7 +79,6 @@ void	ft_exit(t_map **map, char c);
 void ft_move_y(t_map **map, int true, int y);
 void	ft_move_x(t_map **map, int true, int x);
 void	ft_init_image(t_image *images, t_map **map);
-static int	ft_which_img(t_map **map, int x, int y);
 void	ft_print_img(t_map **map);
 int	ft_init_game(t_map **map);
 void	ft_init_map(t_map *map);

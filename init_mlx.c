@@ -18,15 +18,15 @@ void	ft_init_image(t_image *images, t_map **map)
 	int	y;
 
 	images->player = mlx_xpm_file_to_image((*map)->mlx,
-			"sprites/player.mlx", &x, &y);
+			"files_mlx/player.mlx", &x, &y);
 	images->wall = mlx_xpm_file_to_image((*map)->mlx,
-			"sprites/wall.mlx", &x, &y);
+			"files_mlx/wall.mlx", &x, &y);
 	images->floor = mlx_xpm_file_to_image((*map)->mlx,
-			"sprites/floor.mlx", &x, &y);
+			"files_mlx/floor.mlx", &x, &y);
 	images->exit = mlx_xpm_file_to_image((*map)->mlx,
-			"sprites/exit.mlx", &x, &y);
+			"files_mlx/exit.mlx", &x, &y);
 	images->coin = mlx_xpm_file_to_image((*map)->mlx,
-			"sprites/coi.mlx", &x, &y);
+			"files_mlx/coi.mlx", &x, &y);
 	if (images->player == NULL || images->wall == NULL || images->floor == NULL
 		|| images->exit == NULL || images->coin == NULL)
 	{

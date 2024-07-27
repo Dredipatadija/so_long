@@ -38,7 +38,7 @@ int	ft_msg_efree(char *str, int n, char **map)
 {
 	free(map);
 	ft_printf("%s\n", str);
-	return (1);
+	return (n);
 }
 
 void	ft_error_mlx(char *str, t_map **map)
