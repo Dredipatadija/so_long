@@ -10,8 +10,8 @@ char    **ft_cpy_test(t_map *map, char **test)
         test[i] = ft_strdup(map[i]);
         if (test[i] == NULL)
         {
-            free(map);
-            ft_msg_efree("Memory failure", test);
+            ft_free_test(test);
+            ft_msg_efree("Memory failure", map->map);
         }
         i++;
     }

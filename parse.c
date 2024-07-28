@@ -101,11 +101,20 @@ void	ft_parse_file(int argc, char **argmap, t_map *map)
 	len = ft_strlen(argmap[1]);
 	ft_init_map(map);
 	if (argc != 2)
+	{
+		free(map);
 		ft_msg_error("Invalid number of arguments");
+	}
 	if (len <= 4 || ft_strncmp(&argmap[1][lenfinal], ".ber", 4) != 0)
+	{
+		free(map);
 		ft_msg_error("Invalid file");
+	}
 	fd = open(argmap[1], O_RDONLY);
 	if (fd < 0)
+	{
+		free(map);
 		ft_msg_error("File not found");
+	}
 	ft_parse_map(error, fd, map);
 }
