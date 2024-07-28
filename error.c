@@ -41,11 +41,11 @@ int	ft_err_mlxfree(char *str, void *mlx)
 	return (1);
 }
 
-int	ft_msg_efree(char *str, int n, char **map)
+int	ft_msg_efree(char *str, char **map)
 {
 	free(map);
 	ft_printf("%s\n", str);
-	return (n);
+	exit(1);
 }
 
 void	ft_error_mlx(char *str, t_map **map)
