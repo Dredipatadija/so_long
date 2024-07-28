@@ -46,7 +46,7 @@ static int	ft_valid(char **test)
 	}
 	return (0);
 }
-
+0
 static void	ft_okroute(char **test, t_map *map, int x, int y)
 {
 	int	i;
@@ -83,6 +83,7 @@ static void	ft_parse_map(char *error, int fd, t_map *map)
 		ft_msg_efree("Memory failure", map->map);
 	test = ft_cpy_test(map, test);
 	ft_okroute(test, map, map->player.x, map->player.y);
+	ft_free_test(test);
 }
 
 void	ft_parse_file(int argc, char **argmap, t_map *map)

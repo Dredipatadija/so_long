@@ -33,12 +33,15 @@ void	ft_err_fdfree(char *str, int fd, char **map)
 	exit (1);
 }
 
-int	ft_err_mlxfree(char *str, void *mlx)
+	ft_err_mlxfree(char *str, void *mlx, t_map *map)
 {
 	ft_printf("%s\n", str);
 	mlx_destroy_display(mlx);
+	mlx_loop_end((*map)->mlx);
 	free(mlx);
-	return (1);
+	mlx = NULL;
+	ft_free_map(map);
+	exit(1);
 }
 
 void	ft_msg_efree(char *str, char **map)
@@ -61,8 +64,5 @@ void	ft_error_mlx(char *str, t_map **map)
 	if ((*map)->images.coin)
 		mlx_destroy_image((*map)->mlx, (*map)->images.coin);
 	mlx_destroy_window((*map)->mlx, (*map)->window);
-	ft_msg_mlx(str, (*map)->mlx);
-	mlx_loop_end((*map)->mlx);
-	free((*map)->mlx);
-	(*map)->mlx = NULL;
+	ft_err_mlxfree(str, (*map)->mlx, *map);
 }

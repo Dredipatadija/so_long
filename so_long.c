@@ -16,15 +16,12 @@ int	main(int argc, char **argv)
 {
 	t_map	*map;
 
-	error = 0;
 	if (!argv[1])
 		ft_msg_error("Map doesn't exist");
 	map = ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		ft_msg_error("Memory failure");
 	ft_parse_file(argc, argv, map);
-	if (error == 1)
-		return (1);
-	ft_init_mlx(&map);
+	ft_init_game(&map);
 	return (0);
 }
