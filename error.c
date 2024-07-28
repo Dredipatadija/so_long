@@ -33,7 +33,7 @@ void	ft_err_fdfree(char *str, int fd, char **map)
 	exit (1);
 }
 
-	ft_err_mlxfree(char *str, void *mlx, t_map *map)
+void	ft_err_mlxfree(char *str, void *mlx, t_map *map)
 {
 	ft_printf("%s\n", str);
 	mlx_destroy_display(mlx);

@@ -1,19 +1,6 @@
 #include "so_long.h"
 
-int	ft_hook(int keycode, t_map **map)
-{
-	if (keycode == ESC)
-	{
-		ft_error_mlx("Come back soon!", map);
-		ft_free_map(*map);
-		exit(0);
-	}
-	ft_which_hook(keycode, map);
-	ft_print_img(map);
-	return (0);
-}
-
-void	ft_which_hook(int keycode, t_map **map)
+static void	ft_which_hook(int keycode, t_map **map)
 {
 	if (keycode == UP || keycode == W)
 	{
@@ -33,7 +20,7 @@ void	ft_which_hook(int keycode, t_map **map)
 	}
 }
 
-int	ft_move(t_map **map)
+static int	ft_move(t_map **map)
 {
 	char	c;
 
@@ -61,20 +48,18 @@ int	ft_move(t_map **map)
 	return (0); 
 }
 
-void	ft_exit(t_map **map, char c)
+static void	ft_exit(t_map **map, char c)
 {
 	if (c == 'E')
 	{
 		(*map)->player.steps++;
 		ft_printf("Steps: %i Coins: %i\n", (*map)->player.steps,
 				(*map)->player.coin);
-		ft_closemlx("YOU WIN!!", map);
-		ft_free_map(*map);
-		exit (0);
+		ft_winner(map);
 	}
 }
 
-void ft_move_y(t_map **map, int true, int y)
+static void ft_move_y(t_map **map, int true, int y)
 {
 	if (true == 1)
 	{
@@ -83,11 +68,20 @@ void ft_move_y(t_map **map, int true, int y)
 	}
 }
 
-void	ft_move_x(t_map **map, int true, int x)
+static void	ft_move_x(t_map **map, int true, int x)
 {
 	if (true == 1)
 	{
 		(*map)->player.x = (*map)->player.x + x;
 		(*map)->map[(*map)->player.y][(*map)->player.x] = 'P';
 	}
+}
+
+int	ft_hook(int keycode, t_map **map)
+{
+	if (keycode == ESC)
+		ft_closemlx("Come back soon!", map);
+	ft_which_hook(keycode, map);
+	ft_print_img(map);
+	return (0);
 }
