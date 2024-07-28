@@ -29,11 +29,7 @@ void	ft_init_image(t_image *images, t_map **map)
 			"files_mlx/coi.mlx", &x, &y);
 	if (images->player == NULL || images->wall == NULL || images->floor == NULL
 		|| images->exit == NULL || images->coin == NULL)
-	{
 		ft_error_mlx("Error loading image", map);
-		ft_free_map(*map);
-		exit(1);
-	}
 }
 
 static int	ft_which_img(t_map **map, int x, int y)
@@ -68,18 +64,14 @@ void	ft_print_img(t_map **map)
 		while ((*map)->map[y][x] != '\0')
 		{
 			if (ft_which_img(map, x, y) != 0)
-			{
 				ft_error_mlx("Error showing image", map);
-				ft_free_map (*map);
-				exit(1);
-			}
 			x++;
 		}
 		y++;
 	}
 }
 
-int	ft_init_game(t_map **map)
+void	ft_init_game(t_map **map)
 {
 	int	x;
 	int	y;
@@ -87,11 +79,7 @@ int	ft_init_game(t_map **map)
 	(*map)->mlx = mlx_init();
 	mlx_get_screen_size((*map)->mlx, &x, &y);
 	if (x < ((*map)->width * 64) || y < ((*map)->height * 64))
-	{
-		ft_msg_mlx("Map size too large", (*map)->mlx);
-		ft_free_map(*map);
-		return (1);
-	}
+		ft_err_mlxfree("Map size too large", (*map)->mlx, (*map)->map);
 	(*map)->window = mlx_new_window((*map)->mlx, ((*map)->width * 64),
 			((*map)->height * 64), "SO_LONG");
 	ft_find_exit(*map);
