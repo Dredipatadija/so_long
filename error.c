@@ -18,14 +18,14 @@ void	ft_msg_error(char *str)
 	exit(1);
 }
 
-void	ft_err_fd(char *str, int fd, char **map)
+void	ft_err_fd(char *str, int fd)
 {
 	ft_printf("%s\n", str);
 	close(fd);
 	exit(1);
 }
 
-void	ft_err_fdfree(char *str, int fd, char **map)
+void	ft_err_fdfree(char *str, int fd, t_map *map)
 {
 	ft_printf("%s\n", str);
 	close(fd);
@@ -37,7 +37,7 @@ void	ft_err_mlxfree(char *str, void *mlx, t_map *map)
 {
 	ft_printf("%s\n", str);
 	mlx_destroy_display(mlx);
-	mlx_loop_end((*map)->mlx);
+	mlx_loop_end(map->mlx);
 	free(mlx);
 	mlx = NULL;
 	ft_free_map(map);

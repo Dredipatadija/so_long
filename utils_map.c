@@ -21,7 +21,7 @@ t_map	*ft_cpy_map(int fd, t_map *map)
 	{
 		map->map[i] = get_next_line(fd);
 		if (map->map[i] == NULL)
-			ft_err_fdfree("Get_next_line error while copying", fd, map->map);
+			ft_err_fdfree("Get_next_line error while copying", fd, map);
 		i++;
 	}
 	map->map[i] = NULL;
@@ -42,7 +42,7 @@ int	ft_nlines(int fd, t_map *map)
 	}
 	if (map->height == 0)
 	{
-		ft_err_fdfree("Empty map", fd, map->map);
+		ft_err_fdfree("Empty map", fd, map);
 	}
 	return (map->height);
 }
@@ -92,22 +92,21 @@ void	ft_find_position(t_map *map)
 	map->player.y = j;
 }
 
-char	**ft_cpy_test(t_map *map, char **test)
+char    **ft_cpy_test(t_map *map, char **test)
 {
-	int	i;
-	int	j;
+    int i;
 
-	j = 0;
-	i = 0;
-	while (map->map[j] != NULL)
-	{
-		while (map->map[j][i] != '\n')
-		{
-			test[j][i] = map->map[j][i];
-			i++;
-		}
-		j++;
-	}
-	test[j] = NULL;
-	return (test);
+    i = 0;
+    while (map->map[i] != NULL)
+    {
+        test[i] = ft_strdup(map->map[i]);
+        if (test[i] == NULL)
+        {
+            ft_free_test(test);
+            ft_msg_efree("Memory failure", map);
+        }
+        i++;
+    }
+    test[i] = NULL;
+    return (test);
 }

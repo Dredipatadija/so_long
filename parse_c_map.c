@@ -22,13 +22,13 @@ static void	ft_parse_closed2(t_map *map)
 	while (j < map->height)
 	{
 		if (map->map[j][i] != '1')
-			ft_msg_efree("Map is not closed", map->map);
+			ft_msg_efree("Map is not closed", map);
 		j++;
 	}
 	while (i < map->width)
 	{
 		if (map->map[j - 1][i] != '1')
-			ft_msg_efree("Map is not closed", map->map);
+			ft_msg_efree("Map is not closed", map);
 		i++;
 	}
 }
@@ -43,13 +43,13 @@ void	ft_parse_closed(t_map *map)
 	while (i < map->width)
 	{
 		if (map->map[j][i] != '1')
-			ft_msg_efree("Map is not closed", map->map);
+			ft_msg_efree("Map is not closed", map);
 		i++;
 	}
 	while (j < map->height)
 	{
 		if (map->map[j][i - 1] != '1')
-			ft_msg_efree("Map is not closed", map->map);
+			ft_msg_efree("Map is not closed", map);
 		j++;
 	}
 	ft_parse_closed2(map);
@@ -58,11 +58,11 @@ void	ft_parse_closed(t_map *map)
 static void	ft_parse_c2(t_map *map)
 {
 	if (map->nposition != 1)
-			ft_msg_efree("Wrong initial map position", map->map);
+			ft_msg_efree("Wrong initial map position", map);
 	if (map->nexit != 1)
-			ft_msg_efree("Wrong exit position", map->map);
+			ft_msg_efree("Wrong exit position", map);
 	if (map->ncollectable < 1)
-			ft_msg_efree("Wrong number of coins", map->map);
+			ft_msg_efree("Wrong number of coins", map);
 }
 
 void	ft_parse_c(t_map *map)

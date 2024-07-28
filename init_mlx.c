@@ -79,7 +79,7 @@ void	ft_init_game(t_map **map)
 	(*map)->mlx = mlx_init();
 	mlx_get_screen_size((*map)->mlx, &x, &y);
 	if (x < ((*map)->width * 64) || y < ((*map)->height * 64))
-		ft_err_mlxfree("Map size too large", (*map)->mlx, (*map)->map);
+		ft_err_mlxfree("Map size too large", (*map)->mlx, (*map));
 	(*map)->window = mlx_new_window((*map)->mlx, ((*map)->width * 64),
 			((*map)->height * 64), "SO_LONG");
 	ft_find_exit(*map);
@@ -91,5 +91,5 @@ void	ft_init_game(t_map **map)
 	mlx_hook((*map)->window, 17, 0, ft_closemlx, map);
 	mlx_hook((*map)->window, 2, 1L<<0, ft_hook, map);
 	mlx_loop((*map)->mlx);
-	return (0);
+
 }

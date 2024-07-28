@@ -66,29 +66,33 @@ typedef struct s_map
 }				t_map;
 
 void	ft_msg_error(char *str);
-void	ft_err_fd(char *str, int fd, char **map);
-void	ft_err_fdfree(char *str, int fd, char **map);
+void	ft_err_fd(char *str, int fd);
+void	ft_err_fdfree(char *str, int fd, t_map *map);
 void	ft_err_mlxfree(char *str, void *mlx, t_map *map);
-void	ft_msg_efree(char *str, char **map);
+void	ft_msg_efree(char *str, t_map *map);
 void	ft_error_mlx(char *str, t_map **map);
 void	ft_free_map(t_map *map);
 void	ft_free_test(char **test);
+void	ft_parse_square(t_map *map);
+void	ft_parse_map(int fd, t_map *map);
+int		ft_valid(char **test);
+void	ft_okroute(char **test, t_map *map, int x, int y);
 int		ft_hook(int keycode, t_map **map);
 void	ft_init_image(t_image *images, t_map **map);
 void	ft_print_img(t_map **map);
 void	ft_init_game(t_map **map);
 void	ft_init_map(t_map *map);
 void	ft_init_player(t_map *map);
-int		ft_parse_closed(t_map *map);
-int		ft_parse_c(t_map *map);
-int		ft_parse_file(int argc, char **argmap, t_map *map);
+void	ft_parse_closed(t_map *map);
+void	ft_parse_c(t_map *map);
+void	ft_parse_file(int argc, char **argmap, t_map *map);
 t_map	*ft_cpy_map(int fd, t_map *map);
 int		ft_nlines(int fd, t_map *map);
 void	ft_find_exit(t_map *map);
 void	ft_find_position(t_map *map);
 char	**ft_cpy_test(t_map *map, char **test);
-void	ft_closemlx(t_map **map);
+int		ft_closemlx(t_map **map);
 void	ft_winner(t_map **map);
-int	main(int argc, char **argv);
+int		main(int argc, char **argv);
 
 #endif
