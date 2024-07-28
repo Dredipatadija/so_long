@@ -17,11 +17,11 @@ t_map	*ft_cpy_map(int fd, t_map *map)
 	int		i;
 
 	i = 0;
-	if (map->height == 0)
-		return (NULL);
 	while (i < (map->height))
 	{
 		map->map[i] = get_next_line(fd);
+		if (map->map[i] == NULL)
+			ft_err_fdfree("Get_next_line error while copying", fd, map->map);
 		i++;
 	}
 	map->map[i] = NULL;
@@ -37,14 +37,12 @@ int	ft_nlines(int fd, t_map *map)
 	while (line != NULL)
 	{
 		map->height++;
+		free(line);
 		line = get_next_line(fd);
-		free (line);
 	}
 	if (map->height == 0)
 	{
-		ft_printf("%s\n", "Empty map");
-		close(fd);
-		return (0);
+		ft_err_fdfree("Empty map", fd, map->map);
 	}
 	return (map->height);
 }

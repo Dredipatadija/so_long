@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static int	ft_parse_closed2(t_map *map)
+static void	ft_parse_closed2(t_map *map)
 {
 	int	i;
 	int	j;
@@ -22,19 +22,18 @@ static int	ft_parse_closed2(t_map *map)
 	while (j < map->height)
 	{
 		if (map->map[j][i] != '1')
-			return (1);
+			ft_msg_efree("Map is not closed", map->map);
 		j++;
 	}
 	while (i < map->width)
 	{
 		if (map->map[j - 1][i] != '1')
-			return (1);
+			ft_msg_efree("Map is not closed", map->map);
 		i++;
 	}
-	return (0);
 }
 
-int	ft_parse_closed(t_map *map)
+void	ft_parse_closed(t_map *map)
 {
 	int	i;
 	int	j;
@@ -44,30 +43,29 @@ int	ft_parse_closed(t_map *map)
 	while (i < map->width)
 	{
 		if (map->map[j][i] != '1')
-			return (1);
+			ft_msg_efree("Map is not closed", map->map);
 		i++;
 	}
 	while (j < map->height)
 	{
 		if (map->map[j][i - 1] != '1')
-			return (1);
+			ft_msg_efree("Map is not closed", map->map);
 		j++;
 	}
-	return (ft_parse_closed2(map));
+	ft_parse_closed2(map);
 }
 
-static int	ft_parse_c2(t_map *map)
+static void	ft_parse_c2(t_map *map)
 {
 	if (map->nposition != 1)
-		return (1);
+			ft_msg_efree("Wrong initial map position", map->map);
 	if (map->nexit != 1)
-		return (1);
+			ft_msg_efree("Wrong initial map position", map->map);
 	if (map->ncollectable < 1)
-		return (1);
-	return (0);
+			ft_msg_efree("Wrong initial map position", map->map);
 }
 
-int	ft_parse_c(t_map *map)
+void	ft_parse_c(t_map *map)
 {
 	unsigned long	i;
 	unsigned long	j;
@@ -92,5 +90,5 @@ int	ft_parse_c(t_map *map)
 		}
 		j++;
 	}
-	return (ft_parse_c2(map));
+	ft_parse_c2(map);
 }

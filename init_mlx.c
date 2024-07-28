@@ -103,4 +103,5 @@ int	ft_init_game(t_map **map)
 	mlx_hook((*map)->window, 17, 0, ft_closemlx("Come back soon", map), map);
 	mlx_hook((*map)->window, 2, 1L<<0, ft_hook, map);
 	mlx_loop((*map)->mlx);
+	return (0);
 }

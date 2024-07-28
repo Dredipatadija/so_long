@@ -12,21 +12,28 @@
 
 #include "so_long.h"
 
-int	ft_msg_error(char *str, int n)
+void	ft_msg_error(char *str)
 {
 	ft_printf("%s\n", str);
-	return (n);
+	exit(1);
 }
 
-int	ft_msg_fd(char *str, int n, int fd, char **map)
+void	ft_err_fd(char *str, int fd, char **map)
+{
+	ft_printf("%s\n", str);
+	close(fd);
+	exit(1);
+}
+
+void	ft_err_fdfree(char *str, int fd, char **map)
 {
 	ft_printf("%s\n", str);
 	close(fd);
 	free(map);
-	return (n);
+	exit (1);
 }
 
-int	ft_msg_mlx(char *str, void *mlx)
+int	ft_err_mlxfree(char *str, void *mlx)
 {
 	ft_printf("%s\n", str);
 	mlx_destroy_display(mlx);
