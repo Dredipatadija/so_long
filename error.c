@@ -44,7 +44,7 @@ void	ft_err_mlxfree(char *str, void *mlx, t_map *map)
 	exit(1);
 }
 
-void	ft_msg_efree(char *str, char **map)
+void	ft_msg_efree(char *str, t_map *map)
 {
 	ft_free_map(map);
 	ft_printf("%s\n", str);
