@@ -29,7 +29,7 @@ void	ft_err_fdfree(char *str, int fd, char **map)
 {
 	ft_printf("%s\n", str);
 	close(fd);
-	free(map);
+	ft_free_map(map);
 	exit (1);
 }
 
@@ -41,9 +41,9 @@ int	ft_err_mlxfree(char *str, void *mlx)
 	return (1);
 }
 
-int	ft_msg_efree(char *str, char **map)
+void	ft_msg_efree(char *str, char **map)
 {
-	free(map);
+	ft_free_map(map);
 	ft_printf("%s\n", str);
 	exit(1);
 }

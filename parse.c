@@ -62,9 +62,8 @@ static void	ft_okroute(char **test, t_map *map, int x, int y)
 	i = ft_valid(test);
 	if (i == 1)
 	{
-		ft_free_map(map->map);
 		ft_free_test(test);
-		ft_msg_error("Map is not valid");
+		ft_msg_efree("Map is not valid", map->map);
 	}
 }
 
@@ -81,10 +80,7 @@ static void	ft_parse_map(char *error, int fd, t_map *map)
 	ft_parse_c(map);
 	test = (char **)malloc(sizeof(char *) * (map->height + 1));
 	if (!test)
-	{
-		ft_free_map(map->map);
-		ft_msg_efree("Memory failure", test);
-	}
+		ft_msg_efree("Memory failure", map->map);
 	test = ft_cpy_test(map, test);
 	ft_okroute(test, map, map->player.x, map->player.y);
 }

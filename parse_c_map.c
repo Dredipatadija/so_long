@@ -60,9 +60,9 @@ static void	ft_parse_c2(t_map *map)
 	if (map->nposition != 1)
 			ft_msg_efree("Wrong initial map position", map->map);
 	if (map->nexit != 1)
-			ft_msg_efree("Wrong initial map position", map->map);
+			ft_msg_efree("Wrong exit position", map->map);
 	if (map->ncollectable < 1)
-			ft_msg_efree("Wrong initial map position", map->map);
+			ft_msg_efree("Wrong number of coins", map->map);
 }
 
 void	ft_parse_c(t_map *map)
