@@ -12,19 +12,20 @@
 
 #include "so_long.h"
 
-void	ft_parse_square(t_map *map)
+void	ft_parse_square(t_map **map)
 {
 	int	i;
+	int	len;
 
 	i = 0;
-	while ((i < map->height) && map->map[i + 1] != NULL)
+	len = ft_lenmap((*map)->map[0]);
+	while ((*map)->map[i])
 	{
-		if (ft_strlen(map->map[i]) == ft_strlen(map->map[i]))
-			i++;
-		else
-			ft_msg_efree("Map is not a square", map);
+		if (len != ft_lenmap((*map)->map[i]))
+			ft_msg_efree("Map is not a square", *map);
+		i++;
 	}
-	map->width = ft_strlen(map->map[i]);
+	(*map)->width = len;
 }
 
 int	ft_valid(char **test)
@@ -67,16 +68,17 @@ void	ft_okroute(char **test, t_map *map, int x, int y)
 	}
 }
 
-void	ft_parse_map(int fd, t_map *map)
+void	ft_parse_map(int fd, t_map *map, char *argmap)
 {
 	char	**test;
 
-	map->map = (char **)malloc(sizeof(char *) * ft_nlines(fd, map) + 1);
+	map->map = (char **)malloc(sizeof(char *) * ft_nlines(argmap, map) + 1);
 	if (!map->map)
 		ft_err_fd("Memory failure", fd);
-	map = ft_cpy_map(fd, map);
-	ft_parse_square(map);
-	ft_parse_closed(map);
+	ft_cpy_map(fd, &map);
+	ft_parse_square(&map);
+	ft_parse_closed(&map);
+	ft_printf("pare closed is ok\n");
 	ft_parse_c(map);
 	test = (char **)malloc(sizeof(char *) * (map->height + 1));
 	if (!test)
@@ -111,5 +113,5 @@ void	ft_parse_file(int argc, char **argmap, t_map *map)
 		free(map);
 		ft_msg_error("File not found");
 	}
-	ft_parse_map(fd, map);
+	ft_parse_map(fd, map, argmap[1]);
 }

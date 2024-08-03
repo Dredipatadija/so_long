@@ -12,45 +12,63 @@
 
 #include "so_long.h"
 
-static void	ft_parse_closed2(t_map *map)
+int	ft_lenmap(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (line == NULL)
+		return (0);
+	while (line[i] && line[i] != '\n')
+	{
+		i++;
+	}
+	return (i);
+}
+
+static void	ft_parse_closed2(t_map **map)
 {
 	int	i;
 	int	j;
 
-	i = 0;
 	j = 0;
-	while (j < map->height)
+	i = (*map)->width - 1;
+	while ((*map)->map[j])
 	{
-		if (map->map[j][i] != '1')
-			ft_msg_efree("Map is not closed", map);
+		if ((*map)->map[j][0] != '1')
+			ft_msg_efree("Map is not closed", *map);
 		j++;
 	}
-	while (i < map->width)
+	j = 0;
+	while ((*map)->map[j])
 	{
-		if (map->map[j - 1][i] != '1')
-			ft_msg_efree("Map is not closed", map);
-		i++;
+		if ((*map)->map[j][i] != '1')
+			ft_msg_efree("Map is not closed", *map);
+		j++;
 	}
 }
 
-void	ft_parse_closed(t_map *map)
+void	ft_parse_closed(t_map **map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
-	while (i < map->width)
+	j = (*map)->height - 1;
+	printf("antes de empezar");
+	while ((*map)->map[0][i])
 	{
-		if (map->map[j][i] != '1')
-			ft_msg_efree("Map is not closed", map);
+		if ((*map)->map[0][i] != '1' && (*map)->map[0][i] != '\n') 
+			ft_msg_efree("Map is not closed", *map);
 		i++;
 	}
-	while (j < map->height)
+	printf("primer bucle");
+	i = 0;
+	while ((*map)->map[i])
 	{
-		if (map->map[j][i - 1] != '1')
-			ft_msg_efree("Map is not closed", map);
-		j++;
+		if ((*map)->map[j][i] != '1' && (*map)->map[j][i] != '\n')
+			ft_msg_efree("Map is not closed", *map);
+		i++;
 	}
 	ft_parse_closed2(map);
 }

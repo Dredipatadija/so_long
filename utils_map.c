@@ -12,27 +12,28 @@
 
 #include "so_long.h"
 
-t_map	*ft_cpy_map(int fd, t_map *map)
+void	ft_cpy_map(int fd, t_map **map)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (i < (map->height))
+	while (i < (*map)->height - 1)
 	{
-		map->map[i] = get_next_line(fd);
-		if (map->map[i] == NULL)
-			ft_err_fdfree("Get_next_line error while copying", fd, map);
+		(*map)->map[i] = get_next_line(fd);
 		i++;
 	}
-	map->map[i] = NULL;
 	close(fd);
-	return (map);
+	i = 0;
 }
 
-int	ft_nlines(int fd, t_map *map)
+int	ft_nlines(char *argmap, t_map *map)
 {
 	char	*line;
-
+	int		fd;
+	
+	fd = open(argmap, O_RDONLY);
+	if (fd < 0)
+		ft_err_fdfree("Error opening file", fd, NULL);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -44,6 +45,7 @@ int	ft_nlines(int fd, t_map *map)
 	{
 		ft_err_fdfree("Empty map", fd, map);
 	}
+	close(fd);
 	return (map->height);
 }
 
