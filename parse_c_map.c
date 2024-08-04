@@ -55,14 +55,12 @@ void	ft_parse_closed(t_map **map)
 
 	i = 0;
 	j = (*map)->height - 1;
-	printf("antes de empezar");
 	while ((*map)->map[0][i])
 	{
 		if ((*map)->map[0][i] != '1' && (*map)->map[0][i] != '\n') 
 			ft_msg_efree("Map is not closed", *map);
 		i++;
 	}
-	printf("primer bucle");
 	i = 0;
 	while ((*map)->map[i])
 	{
@@ -83,30 +81,30 @@ static void	ft_parse_c2(t_map *map)
 			ft_msg_efree("Wrong number of coins", map);
 }
 
-void	ft_parse_c(t_map *map)
+void	ft_parse_c(t_map **map)
 {
 	unsigned long	i;
 	unsigned long	j;
 
-	i = 0;
 	j = 0;
-	while (map->map[j] != NULL)
+	while ((*map)->map[j] != NULL)
 	{
-		while (map->map[j][i] != '\0')
+		i = 0;
+		while ((*map)->map[j][i] && (*map)->map[j][i] != '\n')
 		{
-			if (map->map[j][i] == 'P')
+			if ((*map)->map[j][i] == 'P')
 			{
-				map->player.x = i;
-				map->player.y = j;
-				map->nposition++;
+				(*map)->player.x = i;
+				(*map)->player.y = j;
+				(*map)->nposition++;
 			}
-			if (map->map[j][i] == 'E')
-				map->nexit++;
-			if (map->map[j][i] == 'C')
-				map->ncollectable++;
+			if ((*map)->map[j][i] == 'E')
+				(*map)->nexit++;
+			if ((*map)->map[j][i] == 'C')
+				(*map)->ncollectable++;
 			i++;
 		}
 		j++;
 	}
-	ft_parse_c2(map);
+	ft_parse_c2(*map);
 }

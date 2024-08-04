@@ -17,7 +17,7 @@ void	ft_cpy_map(int fd, t_map **map)
 	int	i;
 
 	i = 0;
-	while (i < (*map)->height - 1)
+	while (i < (*map)->height)
 	{
 		(*map)->map[i] = get_next_line(fd);
 		i++;

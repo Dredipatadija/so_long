@@ -28,44 +28,39 @@ void	ft_parse_square(t_map **map)
 	(*map)->width = len;
 }
 
-int	ft_valid(char **test)
+void	ft_valid(char **test, t_map *map)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (test[i])
+	j = 0;
+	while (test[j])
 	{
-		j = 0;
-		while (test[i][j])
+		i = 0;
+		while (test[j][i])
 		{
-			if (test[i][j] == 'C' || test[i][j] == 'E')
-				return (1);
-			j++;
+			if (test[j][i] == 'C' || test[j][i] == 'E')
+			{
+				ft_free_test(test);
+				ft_msg_efree("Map is not valid", map);
+			}
+			i++;
 		}
-		i++;
+		j++;
 	}
-	return (0);
 }
 
-void	ft_okroute(char **test, t_map *map, int x, int y)
+void	ft_okroute(char **test, int x, int y)
 {
-	int	i;
-
+	test[y][x] = 'P';
 	if (test[y - 1][x] != 'P' && test[y - 1][x] != '1')
-		ft_okroute(test, map, x, y - 1);
+		ft_okroute(test, x, y - 1);
 	if (test[y + 1][x] != 'P' && test[y + 1][x] != '1')
-		ft_okroute(test, map, x, y + 1);
+		ft_okroute(test, x, y + 1);
 	if (test[y][x - 1] != 'P' && test[y][x - 1] != '1')
-		ft_okroute(test, map, x - 1, y);
+		ft_okroute(test, x - 1, y);
 	if (test[y][x + 1] != 'P' && test[y][x + 1] != '1')
-		ft_okroute(test, map, x + 1, y);
-	i = ft_valid(test);
-	if (i == 1)
-	{
-		ft_free_test(test);
-		ft_msg_efree("Map is not valid", map);
-	}
+		ft_okroute(test, x + 1, y);
 }
 
 void	ft_parse_map(int fd, t_map *map, char *argmap)
@@ -78,13 +73,13 @@ void	ft_parse_map(int fd, t_map *map, char *argmap)
 	ft_cpy_map(fd, &map);
 	ft_parse_square(&map);
 	ft_parse_closed(&map);
-	ft_printf("pare closed is ok\n");
-	ft_parse_c(map);
+	ft_parse_c(&map);
 	test = (char **)malloc(sizeof(char *) * (map->height + 1));
 	if (!test)
 		ft_msg_efree("Memory failure", map);
 	test = ft_cpy_test(map, test);
-	ft_okroute(test, map, map->player.x, map->player.y);
+	ft_okroute(test, map->player.x, map->player.y);
+	ft_valid(test, map);
 	ft_free_test(test);
 }
 
