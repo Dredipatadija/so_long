@@ -78,20 +78,22 @@ void	ft_find_position(t_map *map)
 	unsigned int	i;
 	unsigned int	j;
 
-	i = 0;
 	j = 0;
-	while (map->map[j] != NULL)
+	while (map->map[j])
 	{
-		while (map->map[j][i] != '\0')
+		i = 0;
+		while (map->map[j][i] && map->map[j][i] != '\n')
 		{
 			if (map->map[j][i] == 'P')
-				break ;
+			{
+				map->player.x = i;
+				map->player.y = j;
+				return ;
+			}
 			i++;
 		}
 		j++;
 	}
-	map->player.x = i;
-	map->player.y = j;
 }
 
 char    **ft_cpy_test(t_map *map, char **test)

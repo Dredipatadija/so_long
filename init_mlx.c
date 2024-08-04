@@ -26,7 +26,7 @@ void	ft_init_image(t_image *images, t_map **map)
 	images->exit = mlx_xpm_file_to_image((*map)->mlx,
 			"files_mlx/exit.mlx", &x, &y);
 	images->coin = mlx_xpm_file_to_image((*map)->mlx,
-			"files_mlx/coi.mlx", &x, &y);
+			"files_mlx/coin.mlx", &x, &y);
 	if (images->player == NULL || images->wall == NULL || images->floor == NULL
 		|| images->exit == NULL || images->coin == NULL)
 		ft_error_mlx("Error loading image", map);
@@ -57,14 +57,13 @@ void	ft_print_img(t_map **map)
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	while ((*map)->map[y] != NULL)
 	{
-		while ((*map)->map[y][x] != '\0')
+		x = 0;
+		while ((*map)->map[y][x] && (*map)->map[y][x] != '\n')
 		{
-			if (ft_which_img(map, x, y) != 0)
-				ft_error_mlx("Error showing image", map);
+			ft_which_img(map, x, y);
 			x++;
 		}
 		y++;
@@ -91,5 +90,4 @@ void	ft_init_game(t_map **map)
 	mlx_hook((*map)->window, 17, 0, ft_closemlx, map);
 	mlx_hook((*map)->window, 2, 1L<<0, ft_hook, map);
 	mlx_loop((*map)->mlx);
-
 }

@@ -15,7 +15,7 @@ static int	ft_move(t_map **map)
 {
 	char	c;
 
-	c = (*map)->map[(*map)->player.y][(*map)->player.x - 1];
+	c = (*map)->map[(*map)->player.y][(*map)->player.x];
 	if (c == '0')
 	{
 		(*map)->map[(*map)->player.y][(*map)->player.x] = '0';
@@ -60,21 +60,13 @@ static void	ft_move_x(t_map **map, int true, int x)
 static void	ft_which_hook(int keycode, t_map **map)
 {
 	if (keycode == UP || keycode == W)
-	{
 		ft_move_y(map, ft_move(map), -1);
-	}
 	if (keycode == DOWN || keycode == S)
-	{
 		ft_move_y(map, ft_move(map), 1);
-	}
 	if (keycode == LEFT || keycode == A)
-	{
 		ft_move_x(map, ft_move(map), -1);
-	}
 	if (keycode == RIGHT || keycode == D)
-	{
-		ft_move_x(map, ft_move(map), 1);;
-	}
+		ft_move_x(map, ft_move(map), 1);
 }
 
 int	ft_hook(int keycode, t_map **map)
