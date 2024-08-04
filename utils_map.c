@@ -54,23 +54,23 @@ void	ft_find_exit(t_map *map)
 	unsigned int	i;
 	unsigned int	j;
 
-	i = 0;
 	j = 0;
 	while (map->map[j] != NULL)
 	{
-		while (map->map[j][i] != '\0')
+		i = 0;
+		while (map->map[j][i] && map->map[j][i] != '\n')
 		{
 			if (map->map[j][i] == 'E')
 			{
+				map->x_exit = i;
+				map->y_exit = j;
 				map->map[j][i] = '0';
-				break ;
+				return ;
 			}
 			i++;
 		}
 		j++;
 	}
-	map->x_exit = i;
-	map->y_exit = j;
 }
 
 void	ft_find_position(t_map *map)
