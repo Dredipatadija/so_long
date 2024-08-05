@@ -92,14 +92,15 @@ void	ft_parse_file(char **argmap, t_map **map)
 	int	lenfinal;
 	int	nl;
 
-	nl = ft_nlines(argmap[1], *map);
 	lenfinal = ft_strlen(argmap[1]) - 4;
 	len = ft_strlen(argmap[1]);
-	ft_init_map(map, nl);
-	if (len <= 4 || ft_strncmp(&argmap[1][lenfinal], ".ber", 4) != 0)
-		ft_msg_error("Invalid file", *map);
+if (len <= 4 || ft_strncmp(&argmap[1][lenfinal], ".ber", 4) != 0 ||
+        lenfinal <= 0 || ((ft_strrchr(argmap[1], '/') != NULL &&
+        (ft_strlen(ft_strrchr(argmap[1], '/') + 1) <= 4))))		ft_msg_error("Invalid file", *map);
 	fd = open(argmap[1], O_RDONLY);
 	if (fd < 0)
 		ft_msg_error("File not found", *map);
+	nl = ft_nlines(argmap[1], *map);
+	ft_init_map(map, nl);
 	ft_parse_map(fd, map);
 }
