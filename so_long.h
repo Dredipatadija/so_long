@@ -86,7 +86,7 @@ void	ft_init_map(t_map *map);
 void	ft_init_player(t_map *map);
 void	ft_parse_closed(t_map **map);
 void	ft_parse_c(t_map **map);
-void	ft_parse_file(int argc, char **argmap, t_map *map);
+void	ft_parse_file(char **argmap, t_map *map);
 void	ft_cpy_map(int fd, t_map **map);
 int		ft_nlines(char *argmap, t_map *map);
 void	ft_find_exit(t_map *map);

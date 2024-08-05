@@ -15,17 +15,15 @@
 void	ft_parse_square(t_map **map)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = ft_lenmap((*map)->map[0]);
-	while ((*map)->map[i])
+	while ((*map)->map[i + 1])
 	{
-		if (len != ft_lenmap((*map)->map[i]))
+		if (ft_lenmap((*map)->map[i]) != ft_lenmap((*map)->map[i]))
 			ft_msg_efree("Map is not a square", *map);
 		i++;
 	}
-	(*map)->width = len;
+	(*map)->width = ft_lenmap((*map)->map[0]);
 }
 
 void	ft_valid(char **test, t_map *map)
@@ -69,9 +67,13 @@ void	ft_parse_map(int fd, t_map *map, char *argmap)
 
 	map->map = (char **)malloc(sizeof(char *) * ft_nlines(argmap, map) + 1);
 	if (!map->map)
-		ft_err_fd("Memory failure", fd);
+		ft_err_fd("Memory allocation failed for map", fd);
 	ft_cpy_map(fd, &map);
+	if (map->map[0] == NULL)
+		ft_msg_efree("Error while copying map", map);
 	ft_parse_square(&map);
+	if (map->width > 164 && map->height > 64)
+		ft_msg_efree("Map is too big", map);
 	ft_parse_closed(&map);
 	ft_parse_c(&map);
 	test = (char **)malloc(sizeof(char *) * (map->height + 1));
@@ -83,7 +85,7 @@ void	ft_parse_map(int fd, t_map *map, char *argmap)
 	ft_free_test(test);
 }
 
-void	ft_parse_file(int argc, char **argmap, t_map *map)
+void	ft_parse_file(char **argmap, t_map *map)
 {
 	int		fd;
 	int		len;
@@ -92,11 +94,6 @@ void	ft_parse_file(int argc, char **argmap, t_map *map)
 	lenfinal = ft_strlen(argmap[1]) - 4;
 	len = ft_strlen(argmap[1]);
 	ft_init_map(map);
-	if (argc != 2)
-	{
-		free(map);
-		ft_msg_error("Invalid number of arguments");
-	}
 	if (len <= 4 || ft_strncmp(&argmap[1][lenfinal], ".ber", 4) != 0)
 	{
 		free(map);

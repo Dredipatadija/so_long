@@ -23,7 +23,6 @@ void	ft_cpy_map(int fd, t_map **map)
 		i++;
 	}
 	close(fd);
-	i = 0;
 }
 
 int	ft_nlines(char *argmap, t_map *map)

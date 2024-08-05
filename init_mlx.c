@@ -18,15 +18,15 @@ void	ft_init_image(t_image *images, t_map **map)
 	int	y;
 
 	images->player = mlx_xpm_file_to_image((*map)->mlx,
-			"files_mlx/player.xpm", &x, &y);
+			"files_xpm/player.xpm", &x, &y);
 	images->wall = mlx_xpm_file_to_image((*map)->mlx,
-			"files_mlx/wall.xpm", &x, &y);
+			"files_xpm/wall.xpm", &x, &y);
 	images->floor = mlx_xpm_file_to_image((*map)->mlx,
-			"files_mlx/floor.xpm", &x, &y);
+			"files_xpm/floor.xpm", &x, &y);
 	images->exit = mlx_xpm_file_to_image((*map)->mlx,
-			"files_mlx/exit.xpm", &x, &y);
+			"files_xpm/exit.xpm", &x, &y);
 	images->coin = mlx_xpm_file_to_image((*map)->mlx,
-			"files_mlx/coin.xpm", &x, &y);
+			"files_xpm/coin.xpm", &x, &y);
 	if (images->player == NULL || images->wall == NULL || images->floor == NULL
 		|| images->exit == NULL || images->coin == NULL)
 		ft_error_mlx("Error loading image", map);
