@@ -19,7 +19,7 @@ void	ft_parse_square(t_map **map)
 	i = 0;
 	while ((*map)->map[i + 1])
 	{
-		if (ft_lenmap((*map)->map[i]) != ft_lenmap((*map)->map[i]))
+		if (ft_lenmap((*map)->map[i]) != ft_lenmap((*map)->map[i + 1]))
 			ft_msg_efree("Map is not a square", *map);
 		i++;
 	}
@@ -61,49 +61,48 @@ void	ft_okroute(char **test, int x, int y)
 		ft_okroute(test, x + 1, y);
 }
 
-void	ft_parse_map(int fd, t_map *map, char *argmap)
+void	ft_parse_map(int fd, t_map **map)
 {
 	char	**test;
 
-	map->map = (char **)malloc(sizeof(char *) * ft_nlines(argmap, map) + 1);
-	if (!map->map)
-		ft_err_fd("Memory allocation failed for map", fd);
-	ft_cpy_map(fd, &map);
-	if (map->map[0] == NULL)
-		ft_msg_efree("Error while copying map", map);
-	ft_parse_square(&map);
-	if (map->width > 164 && map->height > 64)
-		ft_msg_efree("Map is too big", map);
-	ft_parse_closed(&map);
-	ft_parse_c(&map);
-	test = (char **)malloc(sizeof(char *) * (map->height + 1));
+	ft_cpy_map(fd, map);
+	if ((*map)->map[0] == NULL)
+		ft_msg_efree("Error while copying map", *map);
+	ft_parse_square(map);
+	if ((*map)->width > 164 && (*map)->height > 64)
+		ft_msg_efree("Map is too big", *map);
+	ft_parse_closed(map);
+	ft_parse_c(map);
+	test = (char **)malloc(sizeof(char *) * ((*map)->height + 1));
 	if (!test)
-		ft_msg_efree("Memory failure", map);
-	test = ft_cpy_test(map, test);
-	ft_okroute(test, map->player.x, map->player.y);
-	ft_valid(test, map);
+		ft_msg_efree("Memory failure", *map);
+	test = ft_cpy_test(*map, test);
+	ft_okroute(test, (*map)->player.x, (*map)->player.y);
+	ft_valid(test, *map);
 	ft_free_test(test);
 }
 
-void	ft_parse_file(char **argmap, t_map *map)
+void	ft_parse_file(char **argmap, t_map **map)
 {
-	int		fd;
-	int		len;
-	int		lenfinal;
+	int	fd;
+	int	len;
+	int	lenfinal;
+	int	nl;
 
 	lenfinal = ft_strlen(argmap[1]) - 4;
 	len = ft_strlen(argmap[1]);
-	ft_init_map(map);
+	nl = ft_nlines(argmap[1], map);
+	ft_init_map(map, nl);
 	if (len <= 4 || ft_strncmp(&argmap[1][lenfinal], ".ber", 4) != 0)
 	{
-		free(map);
+		free(*map);
 		ft_msg_error("Invalid file");
 	}
 	fd = open(argmap[1], O_RDONLY);
 	if (fd < 0)
 	{
-		free(map);
+		free(*map);
 		ft_msg_error("File not found");
 	}
-	ft_parse_map(fd, map, argmap[1]);
+	ft_parse_map(fd, map);
 }

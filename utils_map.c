@@ -25,7 +25,7 @@ void	ft_cpy_map(int fd, t_map **map)
 	close(fd);
 }
 
-int	ft_nlines(char *argmap, t_map *map)
+int	ft_nlines(char *argmap, t_map **map)
 {
 	char	*line;
 	int		fd;
@@ -36,16 +36,16 @@ int	ft_nlines(char *argmap, t_map *map)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		map->height++;
+		(*map)->height++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (map->height == 0)
+	if ((*map)->height == 0)
 	{
-		ft_err_fdfree("Empty map", fd, map);
+		ft_err_fdfree("Empty map", fd, *map);
 	}
 	close(fd);
-	return (map->height);
+	return ((*map)->height);
 }
 
 void	ft_find_exit(t_map *map)

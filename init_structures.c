@@ -12,15 +12,18 @@
 
 #include "so_long.h"
 
-void	ft_init_map(t_map *map)
+void	ft_init_map(t_map **map, int nl)
 {
-	map->nposition = 0;
-	map->nexit = 0;
-	map->ncollectable = 0;
-	map->width = 0;
-	map->height = 0;
-	map->x_exit = 0;
-	map->y_exit = 0;
+	(*map)->nposition = 0;
+	(*map)->nexit = 0;
+	(*map)->ncollectable = 0;
+	(*map)->width = 0;
+	(*map)->height = 0;
+	(*map)->x_exit = -1;
+	(*map)->y_exit = -1;
+	(*map)->map = (char **)malloc(sizeof(char *) * (nl + 1));
+	if (!(*map)->map)
+		ft_msg_error("Memory allocation failed for map");
 }
 
 void	ft_init_player(t_map *map)
