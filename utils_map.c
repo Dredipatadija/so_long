@@ -25,27 +25,30 @@ void	ft_cpy_map(int fd, t_map **map)
 	close(fd);
 }
 
-int	ft_nlines(char *argmap, t_map **map)
+int	ft_nlines(char *argmap, t_map *map)
 {
 	char	*line;
 	int		fd;
+	int		nlines;
 	
+	nlines = 0;
 	fd = open(argmap, O_RDONLY);
 	if (fd < 0)
-		ft_err_fdfree("Error opening file", fd, NULL);
+		ft_msg_error("Error opening file", map);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		(*map)->height++;
+		nlines++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	if ((*map)->height == 0)
+	if (nlines == 0)
 	{
-		ft_err_fdfree("Empty map", fd, *map);
+		close(fd);
+		ft_msg_error("Empty map", map);
 	}
 	close(fd);
-	return ((*map)->height);
+	return (nlines);
 }
 
 void	ft_find_exit(t_map *map)

@@ -65,7 +65,7 @@ typedef struct s_map
 	t_player	player;
 }				t_map;
 
-void	ft_msg_error(char *str);
+void	ft_msg_error(char *str, t_map *map);
 void	ft_err_fd(char *str, int fd);
 void	ft_err_fdfree(char *str, int fd, t_map *map);
 void	ft_err_mlxfree(char *str, void *mlx, t_map *map);
@@ -88,7 +88,7 @@ void	ft_parse_closed(t_map **map);
 void	ft_parse_c(t_map **map);
 void	ft_parse_file(char **argmap, t_map **map);
 void	ft_cpy_map(int fd, t_map **map);
-int		ft_nlines(char *argmap, t_map **map);
+int		ft_nlines(char *argmap, t_map *map);
 void	ft_find_exit(t_map *map);
 void	ft_find_position(t_map *map);
 char	**ft_cpy_test(t_map *map, char **test);

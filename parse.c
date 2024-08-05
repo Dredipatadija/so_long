@@ -15,13 +15,16 @@
 void	ft_parse_square(t_map **map)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while ((*map)->map[i + 1])
+	j = 1;
+	while ((*map)->map[j])
 	{
-		if (ft_lenmap((*map)->map[i]) != ft_lenmap((*map)->map[i + 1]))
+		if (ft_lenmap((*map)->map[i]) != ft_lenmap((*map)->map[j]))
 			ft_msg_efree("Map is not a square", *map);
 		i++;
+		j++;
 	}
 	(*map)->width = ft_lenmap((*map)->map[0]);
 }
@@ -89,20 +92,14 @@ void	ft_parse_file(char **argmap, t_map **map)
 	int	lenfinal;
 	int	nl;
 
+	nl = ft_nlines(argmap[1], *map);
 	lenfinal = ft_strlen(argmap[1]) - 4;
 	len = ft_strlen(argmap[1]);
-	nl = ft_nlines(argmap[1], map);
 	ft_init_map(map, nl);
 	if (len <= 4 || ft_strncmp(&argmap[1][lenfinal], ".ber", 4) != 0)
-	{
-		free(*map);
-		ft_msg_error("Invalid file");
-	}
+		ft_msg_error("Invalid file", *map);
 	fd = open(argmap[1], O_RDONLY);
 	if (fd < 0)
-	{
-		free(*map);
-		ft_msg_error("File not found");
-	}
+		ft_msg_error("File not found", *map);
 	ft_parse_map(fd, map);
 }

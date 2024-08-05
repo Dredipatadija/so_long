@@ -17,10 +17,10 @@ int	main(int argc, char **argv)
 	t_map	*map;
 
 	if (argc != 2)
-		ft_msg_error("You must run so_long with a map");
+		ft_printf("You must run so_long with a map");
 	map = ft_calloc(sizeof(t_map), 1);
 	if (!map)
-		ft_msg_error("Memory allocation failed for t_map at the beginning");
+		ft_printf("Memory allocation failed for t_map at the beginning");
 	ft_parse_file(argv, &map);
 	ft_init_game(&map);
 	return (0);

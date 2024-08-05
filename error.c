@@ -12,9 +12,10 @@
 
 #include "so_long.h"
 
-void	ft_msg_error(char *str)
+void	ft_msg_error(char *str, t_map *map)
 {
 	ft_printf("%s\n", str);
+	free(map);
 	exit(1);
 }
 
