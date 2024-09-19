@@ -15,7 +15,7 @@ CC          = gcc
 
 CFLAGS      = -Wextra -Werror -Wall -I$(INC) -I$(LIBFT_DIR) -I$(MLX_DIR)
 
-LDFLAGS     = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) $(MLX) $(MLX_LINUX) -lX11 -lXext -lm -lbsd
+LDFLAGS     = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lmlx_Linux -lX11 -lXext -lm -lbsd
 
 INC         = ./
 
