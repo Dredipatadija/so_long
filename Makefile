@@ -12,7 +12,8 @@
 NAME        = so_long
 
 CC          = gcc
-CFLAGS      = -Wextra -Werror -Wall -I$(INC) -I$(LIBFT_DIR)inc/ -I$(MLX_DIR)
+
+CFLAGS      = -Wextra -Werror -Wall -I$(INC) -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 LDFLAGS     = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) $(MLX) $(MLX_LINUX) -lX11 -lXext -lm -lbsd
 
