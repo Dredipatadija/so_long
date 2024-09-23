@@ -51,7 +51,6 @@ $(MLX):
 
 clean:
 	rm -rf $(OBJS_DIR)
-	rm -rf $(OBJS_BONUS_DIR)
 	make fclean -sC $(LIBFT_DIR)
 	make clean -sC $(MLX_DIR)
 
