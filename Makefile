@@ -15,7 +15,7 @@ CC          = gcc
 
 CFLAGS      = -Wextra -Werror -Wall -I$(INC) -I$(LIBFT_DIR) -I$(MLX_DIR)
 
-LDFLAGS     = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lmlx_Linux -lX11 -lXext
+LDFLAGS     = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext
 
 INC         = ./
 
@@ -24,12 +24,11 @@ LIBFT       = $(LIBFT_DIR)libft.a
 
 MLX_DIR     = mlx_linux/
 MLX         = $(MLX_DIR)libmlx.a
-MLX_LINUX   = $(MLX_DIR)libmlx_Linux.a
 
 SRCS_DIR    = ./
-OBJS_DIR    = objs/
-SRCS_FILES	= $(wildcard $(SRCS_DIR)*.c)
+OBJS_DIR    = objects/
 
+SRCS_FILES	= $(wildcard $(SRCS_DIR)*.c)
 OBJS_FILES  = $(SRCS_FILES:.c=.o)
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
@@ -37,7 +36,7 @@ OBJS		= $(addprefix $(OBJS_DIR), $(OBJS_FILES))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MLX) $(PRINTF) $(OBJS) 
+$(NAME): $(LIBFT) $(MLX) $(OBJS) 
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
