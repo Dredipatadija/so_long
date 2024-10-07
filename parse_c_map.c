@@ -57,7 +57,7 @@ void	ft_parse_closed(t_map **map)
 	j = (*map)->height - 1;
 	while ((*map)->map[0][i])
 	{
-		if ((*map)->map[0][i] != '1' && (*map)->map[0][i] != '\n') 
+		if ((*map)->map[0][i] != '1' && (*map)->map[0][i] != '\n')
 			ft_msg_efree("Map is not closed", *map);
 		i++;
 	}
@@ -107,9 +107,9 @@ void	ft_parse_c(t_map **map)
 		j++;
 	}
 	if ((*map)->nposition != 1)
-			ft_msg_efree("Wrong initial map position", *map);
+		ft_msg_efree("Wrong initial map position", *map);
 	if ((*map)->nexit != 1)
-			ft_msg_efree("Wrong exit position", *map);
+		ft_msg_efree("Wrong exit position", *map);
 	if ((*map)->ncollectable < 1)
-			ft_msg_efree("Wrong number of coins", *map);
+		ft_msg_efree("Wrong number of coins", *map);
 }

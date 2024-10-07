@@ -28,10 +28,10 @@ void	ft_init_map(t_map **map, int nl)
 	if (!(*map)->map)
 		ft_msg_error("Memory allocation failed for map", *map);
 	while (i <= nl)
-    {
-        (*map)->map[i] = NULL;
+	{
+		(*map)->map[i] = NULL;
 		i++;
-    }
+	}
 }
 
 void	ft_init_player(t_map *map)

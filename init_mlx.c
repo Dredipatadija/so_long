@@ -12,6 +12,22 @@
 
 #include "so_long.h"
 
+void	ft_error_mlx(char *str, t_map **map)
+{
+	if ((*map)->images.player)
+		mlx_destroy_image((*map)->mlx, (*map)->images.player);
+	if ((*map)->images.wall)
+		mlx_destroy_image((*map)->mlx, (*map)->images.wall);
+	if ((*map)->images.floor)
+		mlx_destroy_image((*map)->mlx, (*map)->images.floor);
+	if ((*map)->images.exit)
+		mlx_destroy_image((*map)->mlx, (*map)->images.exit);
+	if ((*map)->images.coin)
+		mlx_destroy_image((*map)->mlx, (*map)->images.coin);
+	mlx_destroy_window((*map)->mlx, (*map)->window);
+	ft_err_mlxfree(str, (*map)->mlx, *map);
+}
+
 void	ft_init_image(t_image *images, t_map **map)
 {
 	int	x;
@@ -86,8 +102,8 @@ void	ft_init_game(t_map **map)
 	ft_init_player(*map);
 	ft_print_img(map);
 	ft_printf("Steps: %i Coins: %i\n", (*map)->player.steps,
-			(*map)->player.coin);
+		(*map)->player.coin);
 	mlx_hook((*map)->window, 17, 0, ft_closemlx, map);
-	mlx_hook((*map)->window, 2, 1L<<0, ft_hook, map);
+	mlx_hook((*map)->window, 2, 1L << 0, ft_hook, map);
 	mlx_loop((*map)->mlx);
 }

@@ -51,19 +51,3 @@ void	ft_msg_efree(char *str, t_map *map)
 	ft_printf("%s\n", str);
 	exit(1);
 }
-
-void	ft_error_mlx(char *str, t_map **map)
-{
-	if ((*map)->images.player)
-		mlx_destroy_image((*map)->mlx, (*map)->images.player);
-	if ((*map)->images.wall)
-		mlx_destroy_image((*map)->mlx, (*map)->images.wall);
-	if ((*map)->images.floor)
-		mlx_destroy_image((*map)->mlx, (*map)->images.floor);
-	if ((*map)->images.exit)
-		mlx_destroy_image((*map)->mlx, (*map)->images.exit);
-	if ((*map)->images.coin)
-		mlx_destroy_image((*map)->mlx, (*map)->images.coin);
-	mlx_destroy_window((*map)->mlx, (*map)->window);
-	ft_err_mlxfree(str, (*map)->mlx, *map);
-}

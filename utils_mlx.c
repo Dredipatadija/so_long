@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_mlx.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arenilla <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 10:17:13 by arenilla          #+#    #+#             */
+/*   Updated: 2024/10/07 10:17:17 by arenilla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	ft_closemlx(t_map **map)
@@ -25,7 +37,7 @@ int	ft_closemlx(t_map **map)
 
 void	ft_winner(t_map **map)
 {
-		if ((*map)->images.player)
+	if ((*map)->images.player)
 		mlx_destroy_image((*map)->mlx, (*map)->images.player);
 	if ((*map)->images.wall)
 		mlx_destroy_image((*map)->mlx, (*map)->images.wall);
