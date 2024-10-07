@@ -44,7 +44,7 @@ static int	ft_move0(t_map **map, int new_y, int new_x)
 		return (1);
 	}
 	if (c == 'C')
-		return (ft_moveC(map, new_y, new_x));
+		return (ft_movec(map, new_y, new_x));
 	if (c == 'E')
 	{
 		(*map)->player.steps++;
