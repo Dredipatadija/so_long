@@ -93,7 +93,6 @@ void	ft_init_game(t_map **map)
 
 	(*map)->mlx = mlx_init();
 	mlx_get_screen_size((*map)->mlx, &x, &y);
-	printf("Screen size: %ix%i\n", x, y);
 	if (x < ((*map)->width * 64) || y < ((*map)->height * 64))
 		ft_err_mlxfree("Map size too large", (*map)->mlx, (*map));
 	(*map)->window = mlx_new_window((*map)->mlx, ((*map)->width * 64),
