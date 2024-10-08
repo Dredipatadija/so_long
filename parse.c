@@ -72,7 +72,7 @@ void	ft_parse_map(int fd, t_map **map)
 	if ((*map)->map[0] == NULL)
 		ft_msg_efree("Error while copying map", *map);
 	ft_parse_square(map);
-	if ((*map)->width > 164 && (*map)->height > 64)
+	if ((*map)->width > 60 || (*map)->height > 32)
 		ft_msg_efree("Map is too big", *map);
 	ft_parse_closed(map);
 	ft_parse_c(map);

@@ -33,14 +33,14 @@ static void	ft_parse_closed2(t_map **map)
 
 	j = 0;
 	i = (*map)->width - 1;
-	while ((*map)->map[j])
+	while ((*map)->map[j] && j < (*map)->height)
 	{
 		if ((*map)->map[j][0] != '1')
 			ft_msg_efree("Map is not closed", *map);
 		j++;
 	}
 	j = 0;
-	while ((*map)->map[j])
+	while ((*map)->map[j] && j < (*map)->height)
 	{
 		if ((*map)->map[j][i] != '1')
 			ft_msg_efree("Map is not closed", *map);
@@ -55,14 +55,14 @@ void	ft_parse_closed(t_map **map)
 
 	i = 0;
 	j = (*map)->height - 1;
-	while ((*map)->map[0][i])
+	while ((*map)->map[0][i] && i < (*map)->width)
 	{
 		if ((*map)->map[0][i] != '1' && (*map)->map[0][i] != '\n')
 			ft_msg_efree("Map is not closed", *map);
 		i++;
 	}
 	i = 0;
-	while ((*map)->map[i])
+	while ((*map)->map[j] && i < (*map)->width)
 	{
 		if ((*map)->map[j][i] != '1' && (*map)->map[j][i] != '\n')
 			ft_msg_efree("Map is not closed", *map);

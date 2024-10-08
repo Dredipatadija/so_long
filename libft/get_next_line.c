@@ -112,11 +112,17 @@ static char	*ft_nextbuf(char *buffer)
 	return (nextb);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int flag)
 {
 	static char	*buffer;
 	char		*oneline;
 
+	if (flag == 1)
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
 	if (BUFFER_SIZE < 1 || fd < 0)
 		return (NULL);
 	if (!buffer)
@@ -146,7 +152,7 @@ char	*get_next_line(int fd)
 	}
     while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 		if (!line)
 			break;
 		printf("%s", line);

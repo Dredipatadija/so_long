@@ -19,9 +19,10 @@ void	ft_cpy_map(int fd, t_map **map)
 	i = 0;
 	while (i < (*map)->height)
 	{
-		(*map)->map[i] = get_next_line(fd);
+		(*map)->map[i] = get_next_line(fd, 0);
 		i++;
 	}
+	get_next_line(fd, 1);
 	close(fd);
 }
 
@@ -35,12 +36,12 @@ int	ft_nlines(char *argmap, t_map *map)
 	fd = open(argmap, O_RDONLY);
 	if (fd < 0)
 		ft_msg_error("Error opening file", map);
-	line = get_next_line(fd);
+	line = get_next_line(fd, 0);
 	while (line != NULL)
 	{
 		nlines++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 	}
 	if (nlines == 0)
 	{
